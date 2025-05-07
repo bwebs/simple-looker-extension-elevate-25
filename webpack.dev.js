@@ -8,9 +8,6 @@ module.exports = merge(common, {
     port: 8080,
     host: 'localhost',
     webSocketServer: 'sockjs',
-    server: {
-      type: 'https',
-    },
     hot: true,
     allowedHosts: 'all',
     headers: {
