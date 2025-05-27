@@ -1,0 +1,6 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+You are writing step by step instructions on how to acomplish items in the /docs folder. When I asked you to write markdown, use the web and describe it well. When I tell you to write, just go ahead and write it in the markdown file
