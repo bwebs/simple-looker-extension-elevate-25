@@ -3,6 +3,7 @@ import { ExtensionProvider } from "@looker/extension-sdk-react";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import { AppContextProvider } from "./AppContext";
 import "./index.css";
 
 const mountApp = () => {
@@ -12,7 +13,7 @@ const mountApp = () => {
   if (!root) {
     root = document.createElement("div");
     root.id = rootId;
-    root.style.height = "100vh";
+    root.style.height = "100%";
     root.style.display = "flex";
     document.body.style.margin = "0";
     document.body.appendChild(root);
@@ -21,7 +22,9 @@ const mountApp = () => {
   ReactDOM.render(
     <ExtensionProvider>
       <ComponentsProvider>
-        <App />
+        <AppContextProvider>
+          <App />
+        </AppContextProvider>
       </ComponentsProvider>
     </ExtensionProvider>,
     root
