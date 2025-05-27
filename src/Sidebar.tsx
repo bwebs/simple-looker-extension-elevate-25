@@ -1,6 +1,7 @@
-import { Card, Header, Span } from "@looker/components";
+import { Box, Card, CodeBlock, Header, Span } from "@looker/components";
 import React from "react";
 import Balancer from "react-wrap-balancer";
+import Settings from "./Settings";
 
 const Sidebar: React.FC = () => {
   return (
@@ -16,7 +17,13 @@ const Sidebar: React.FC = () => {
           <Balancer>Tabbed Dashboard Dashboard Elevate '25</Balancer>
         </Span>
       </Header>
-      <Span p="xsmall">Dashboard tabs go here</Span>
+      <Balancer>
+        Configureable dashboard selections will go here: below are global
+        dashboard filters
+      </Balancer>
+      <CodeBlock fontSize="xxsmall">{JSON.stringify({}, null, 2)}</CodeBlock>
+      <Box flexGrow={1} />
+      <Settings />
     </Card>
   );
 };
