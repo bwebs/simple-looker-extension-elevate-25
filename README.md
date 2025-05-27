@@ -19,5 +19,5 @@ application: simple_extension {
 }
 ```
 
-11.   Refresh your looker window and go to applications and open Simple Extension
-12: :tada:
+11. Refresh your looker window and go to applications and open Simple Extension
+12. :tada:
