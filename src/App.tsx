@@ -1,30 +1,25 @@
-import { Box, Header, Span } from "@looker/components";
-import React, { useState } from "react";
-import useSWR from "swr";
+import { Box } from "@looker/components";
+import React from "react";
+import { useAppContext } from "./AppContext";
 import Dashboard from "./Dashboard";
-import useSdk from "./hooks/useSdk";
 import Sidebar from "./Sidebar";
 
 const App: React.FC = () => {
-  const [selected, setSelected] = useState<string>();
-  const sdk = useSdk();
-  const { data: me, isLoading, error } = useSWR("me", () => sdk.ok(sdk.me()));
-
+  const { isLoading, me } = useAppContext();
   if (isLoading) {
     return <Box>Loading...</Box>;
-  } else if (error) {
-    return <Box>Error: {error.message}</Box>;
   } else if (me) {
     return (
       <>
-        <Header>
-          <Span p="xsmall" fontSize="xlarge">
-            Simple Extension
-          </Span>
-        </Header>
-        <Box display="grid" style={{ gridTemplateColumns: "300px 1fr" }}>
-          <Sidebar selected={selected} onSelect={setSelected} />
-          <Dashboard selected={selected} />
+        <Box
+          p="medium"
+          display="grid"
+          height="100%"
+          backgroundColor="#A3B3C9"
+          style={{ gridTemplateColumns: "300px 1fr", gap: "12px" }}
+        >
+          <Sidebar />
+          <Dashboard />
         </Box>
       </>
     );

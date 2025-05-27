@@ -140,26 +140,10 @@ html {
     box-sizing: inherit;
 }
 
-/* Custom styling start */
-body {
-    background-color: #fff;
-    font-family: 'Google Sans';
-    font-size: 16px;
-}
-
-.wrapper {
-    padding: 20px;
-}
-
-header.main {
-    padding: 10px 0;
-}
-
-header.main h1 {
-    font-size: 1.5rem;
-}
-
-section.intro,
-section.user-info {
-    padding: 10px 0;
+body, html, #extension-root {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
