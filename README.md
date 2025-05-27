@@ -21,3 +21,4 @@ application: simple_extension {
 
 11. Refresh your looker window and go to applications and open Simple Extension
 12. :tada:
+13. Now start the tutoral by going to [section1](./docs/section1.md)
