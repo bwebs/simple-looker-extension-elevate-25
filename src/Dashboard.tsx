@@ -4,6 +4,7 @@ import React, { useCallback } from "react";
 import styled from "styled-components";
 import { useAppContext } from "./AppContext";
 import useExtensionSdk from "./hooks/useExtensionSdk";
+import { DASHBOARD_ID_KEY } from "./utils/constants";
 import { urlToRecord } from "./utils/urlToRecord";
 
 const StyledCard = styled(Card)`
@@ -24,8 +25,10 @@ const Dashboard: React.FC = () => {
       if (el && !el.children.length) {
         const embed_sdk = getEmbedSDK();
         embed_sdk.init(extension_sdk.lookerHostData?.hostUrl!);
+        const config_data = extension_sdk.getContextData();
+        const dashboard_ids = config_data?.[DASHBOARD_ID_KEY] || [];
         embed_sdk
-          .createDashboardWithId("thelook::business_pulse")
+          .createDashboardWithId(dashboard_ids[0]!)
           .appendTo(el)
           .on("page:changed", (event: any) => {
             if (event?.page?.absoluteUrl?.length) {

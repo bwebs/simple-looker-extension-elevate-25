@@ -69,7 +69,7 @@ const Settings: React.FC = () => {
 
 4. Make sure to import Space, label, and InputChips from @looker/components. `import { Space, Label, InputChips } from "@looker/components";`
 5. Refresh your page and click the Settings button
-6. Enter in `thelook_ecomm:business_pulse` and `thelook_ecomm:brand_lookup`.
+6. Enter in `thelook_ecomm::business_pulse` and `thelook_ecomm::brand_lookup`.
 7. Refresh the page and open the settings again, you should see these two values saved.
 
 ### Extension Context Data Example
@@ -125,7 +125,7 @@ const Sidebar: React.FC = () => {
 ```
 
 3. Make sure you import the constants file `import { DASHBOARD_ID_KEY } from "./utils/constants";` as well as the useExtensionSdk hook `import useExtensionSdk from "./hooks/useExtensionSdk";`
-4. Replace the placeholder components `<Span><Balancer>Configureable dashboard selections...</Balancer></Span>` with the following code. This will display a button for each dashboard_id in the sidebar.
+4. Replace the placeholder components `<Balancer>Configureable dashboard selections...</Balancer>` with the following code. This will display a button for each dashboard_id in the sidebar.
 
 ```tsx
 <List>
