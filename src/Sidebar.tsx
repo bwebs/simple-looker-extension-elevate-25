@@ -1,9 +1,11 @@
 import { Box, Card, CodeBlock, Header, Span } from "@looker/components";
 import React from "react";
 import Balancer from "react-wrap-balancer";
+import { useAppContext } from "./AppContext";
 import Settings from "./Settings";
 
 const Sidebar: React.FC = () => {
+  const { global_filters } = useAppContext();
   return (
     <Card
       raised
@@ -21,7 +23,9 @@ const Sidebar: React.FC = () => {
         Configureable dashboard selections will go here: below are global
         dashboard filters
       </Balancer>
-      <CodeBlock fontSize="xxsmall">{JSON.stringify({}, null, 2)}</CodeBlock>
+      <CodeBlock fontSize="xxsmall">
+        {JSON.stringify(global_filters, null, 2)}
+      </CodeBlock>
       <Box flexGrow={1} />
       <Settings />
     </Card>
