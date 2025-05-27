@@ -6,7 +6,7 @@
 4. Enter the following repo and clone: `https://github.com/bwebs/simple-looker-extension-elevate-25`. You can keep it in the default folder. When asked, click Open or Open in New Window 
 5. Cmd+shift+p (alternatively click the box in the top and center of the screen, click Show and Run Commands > ) and seearch and select `Terminal: Create New Terminal`
 6. Run `npm install && npm run dev`
-7. Open another terminal using the same command (or press the + button on the top right of the terminal section) and run: `curl -s https://cdn.lkr.dev/scripts/tunnel.sh | sh` to start a cloudflare tunnel. Once complete, scroll up and find the url in the box.
+7. Open another terminal using the same command (or press the + button on the top right of the terminal section) and run: `curl -s https://raw.githubusercontent.com/bwebs/simple-looker-extension-elevate-25/refs/heads/main/tunnel.sh | sh` to start a cloudflare tunnel. Once complete, scroll up and find the url in the box.
 8. Open chrome and visit `https://<tunnel-url>/bundle.js` 
 9. Open up a looker project from a demo instance like [demoeast](https://demoeast.cloud.looker.com), [demowest](https://demowest.cloud.looker.com), or [demoemea](https://demoemea.cloud.looker.com) and put this in the manifest.lkml. Make sure to replace your server url in the url field.
 10. 
