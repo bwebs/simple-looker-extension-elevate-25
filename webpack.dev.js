@@ -21,6 +21,7 @@ module.exports = merge(common, {
         'X-Requested-With, content-type, Authorization',
     },
     client: {
+      webSocketURL: 'wss://localhost:8080/ws',
       overlay: {
         runtimeErrors: (error) => {
           if (
