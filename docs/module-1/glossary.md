@@ -1,43 +1,6 @@
-# Introduction to Extensions + React
+# Glossary
 
-To get started on this section, run `git checkout section1-start --force`, to jump to the end of this section, run `git checkout section1-end --force`
-
-## Overview
-- Introduction to application manifest and entitlements
-- Embed a dashboard
-- Saving the dashboard state and filters
-
-## Items to Teach
-
-- Importing packages
-- Typescript interfaces
-- React APIs
-  - Passing props to components
-  - useState
-  - React Context
-  - useCallback
-- @looker/embed-sdk
-  - building the url
-  - on for javascript events
-  - the .then and dashboard state
-- Adding embed entitlements
-
-# Introduction to application manifest and entitlements
-
-In order for your extension to be able to embed a dashboard, you need to add the `use_iframes` and `use_embeds` entitlements to your manifest.lkml file
-
-```lkml
-application: simple_extension {
-  label: "Simple Extension"
-  url: "<serveo-url>/bundle.js"
-  entitlements: {
-    core_api_methods: ["me"]
-    use_embeds: yes
-    use_iframes: yes
-  }
-}
-
-## What is the Looker Project Manifest?
+## Looker Project Manifest
 
 The **Looker project manifest** is a special configuration file (typically named `manifest.lkml`) that defines project-wide settings, dependencies, and applications (extensions) for your Looker project. It acts as the central place to declare:
 - Project metadata
@@ -45,13 +8,7 @@ The **Looker project manifest** is a special configuration file (typically named
 - Constants and localization settings
 - Applications (extensions) and their configuration
 
-The manifest is essential for enabling and configuring Looker Extensions, which are custom applications that run inside the Looker platform. By defining an application in the manifest, you make it available to users in the Looker UI, and you can control where and how it appears.
-
-For more details, see the [Looker Project Manifest documentation](https://cloud.google.com/looker/docs/reference/param-project-manifest).
-
-## Defining an Application in the Manifest
-
-To add an extension or application, use the `application` parameter in your `manifest.lkml` file. Here's a basic example:
+The manifest is essential for enabling and configuring Looker Extensions, which are custom applications that run inside the Looker platform. By defining an application in the manifest, you make it available to users in the Looker UI, and you can control where and how it appears. Example application definition:
 
 ```lkml
 application: my_extension {
@@ -69,13 +26,27 @@ application: my_extension {
 }
 ```
 
-- Use `url` for development (points to your local dev server)
-- Use `file` for production (points to a static JS file in your project)
-- The `entitlements` block controls what your extension is allowed to do
+For more details, see the [Looker Project Manifest documentation](https://cloud.google.com/looker/docs/reference/param-project-manifest) and the [Looker Application parameter reference](https://cloud.google.com/looker/docs/reference/param-manifest-application).
 
-## What are Entitlements?
+
+## Entitlements
 
 **Entitlements** are permissions that specify what capabilities your Looker extension or application is allowed to use. They are defined in the `entitlements` block of the application configuration in the manifest. This helps ensure security and proper isolation between extensions and the Looker platform.
+
+> ⚠️ Only the entitlements you specify are granted to your extension. If your extension tries to use a capability not listed, it will be blocked by Looker.
+
+### Example Entitlements Block
+
+```lkml
+entitlements: {
+  local_storage: yes
+  navigation: yes
+  new_window: yes
+  use_embeds: yes
+  core_api_methods: ["run_inline_query", "all_lookml_models"]
+  external_api_urls: ["https://api.example.com"]
+}
+```
 
 ### Common Entitlements
 
@@ -96,75 +67,7 @@ application: my_extension {
 
 For a full list and detailed descriptions, see the [Looker entitlements documentation](https://cloud.google.com/looker/docs/reference/param-manifest-application#entitlements).
 
-### Example: Entitlements Block
-
-```lkml
-entitlements: {
-  local_storage: yes
-  navigation: yes
-  new_window: yes
-  use_embeds: yes
-  core_api_methods: ["run_inline_query", "all_lookml_models"]
-  external_api_urls: ["https://api.example.com"]
-}
-```
-
-- Only the entitlements you specify are granted to your extension.
-- If your extension tries to use a capability not listed, it will be blocked by Looker.
-
-### Best Practices
-- **Grant only the entitlements your extension needs** for its functionality.
-- **Review and update entitlements** as your extension evolves.
-- **Test your extension** in both development (`url`) and production (`file`) modes to ensure entitlements are set correctly.
-
-## Further Reading
-- [Looker Project Manifest documentation](https://cloud.google.com/looker/docs/reference/param-project-manifest)
-- [Looker Application parameter reference](https://cloud.google.com/looker/docs/reference/param-manifest-application)
-- [Looker Extension Framework Overview](https://cloud.google.com/looker/docs/extension-framework)
-
-
-
-
-# Embed a dashboard
-
-1. Open up the [Dashboard.tsx](../src/Dashboard.tsx) file.
-2. Update the Dashboard component to the following
-
-```tsx
-const Dashboard: React.FC = () => {
-  const dashboardRef = useCallback((el: HTMLDivElement) => {
-    if (el && !el.children.length) {
-      const embed_sdk = getEmbedSDK();
-      embed_sdk.init(extension_sdk.lookerHostData?.hostUrl!);
-      embed_sdk
-        .createDashboardWithId("thelook::business_pulse")
-        .appendTo(el)
-        .build()
-        .connect()
-        .catch((error: any) => {
-          console.error("Error embedding dashboard:", error);
-        });
-    }
-  }, []);
-
-  return (
-    <StyledCard p="xsmall" raised borderRadius="large" ref={dashboardRef} />
-  );
-};
-```
-
-3. You should see some errors in your IDE that look like this:
-![errors](./section1-errors.png)
-4. Resolve the imports by adding the following to the top of the file:
-
-```tsx
-import { getEmbedSDK } from "@looker/embed-sdk";
-import useExtensionSdk from "./hooks/useExtensionSdk";
-import { useCallback } from "react";
-```
-
-
-## Importing packages
+## Importing JavaScript packages
 
 In JavaScript, **importing packages** means bringing in external code libraries or modules into your project so you can use their features and functionality. Packages are collections of reusable code—such as functions, classes, or entire frameworks—that help you avoid reinventing the wheel and speed up development.
 
@@ -187,14 +90,14 @@ This tells your project to include the specified package or module, making its e
 
 > **Note:** Before you can import a package, you usually need to install it using a package manager like `npm` or `yarn` (e.g., `npm install react`). We've done all that for you already throughout this tutorial
 
-## What is npm?
+## npm
 
 **npm** (Node Package Manager) is the default package manager for JavaScript projects using Node.js. It allows you to easily install, update, and manage external libraries (called packages) that your project depends on. With npm, you can:
 - Download and install packages from the [npm registry](https://www.npmjs.com/)
 - Manage your project's dependencies in a single file (`package.json`)
 - Run scripts for building, testing, and running your app
 
-## The `package.json` file
+### package.json
 
 The [`package.json`](../package.json) file is the heart of any React, Javascript, or Node.js project. It lists all the packages (dependencies) your project needs, along with scripts and metadata. You can view your project's `package.json` [here](../package.json).
 
@@ -212,9 +115,9 @@ These are only needed for development and building the project:
 - **webpack, webpack-cli, webpack-dev-server**: Bundles your code and serves it during development.
 - **@babel/core, @babel/preset-***: Tools for transpiling modern JavaScript and React code.
 
-> For a full list, see the [`package.json`](../package.json) file.
+> For a full list, see the [`package.json`](../../package.json) file.
 
-## What is the Embed SDK?
+## Embed SDK
 
 The [Looker JavaScript Embed SDK](https://www.npmjs.com/package/@looker/embed-sdk) is a library designed to make it easy to embed Looker content—such as Dashboards, Looks, Explores, Reports, and Extensions—directly into your web applications. It provides a fluent, modern JavaScript API for securely embedding and interacting with Looker content via an IFRAME, handling authentication, navigation, and event communication between your app and Looker.
 
@@ -231,7 +134,7 @@ For more details, see the [Embed SDK documentation](https://www.npmjs.com/packag
 
 Here we will be using it in tandem with the [Extension SDK](https://www.npmjs.com/package/@looker/extension-sdk) to embed a dashboard.
 
-## What is React's useCallback?
+## React's useCallback
 
 The `useCallback` Hook in React is used to memoize (cache) a function so that it only changes if its dependencies change. This is especially useful when passing callback functions to child components that rely on reference equality to prevent unnecessary re-renders (for example, when using `React.memo`). This is our case when we loaded a Looker iframe and we don't want to continue to re-open new Looker iframes on every render.
 
@@ -250,7 +153,7 @@ const memoizedCallback = useCallback(() => {
 
 - The function will only be recreated if one of the values in the `dependencies` array changes.
 
-### Example
+### Example:
 Suppose you have a parent component that passes a function to a child component. Without `useCallback`, the function is recreated on every render, causing the child to re-render even if its props haven't changed:
 
 ```tsx
@@ -274,93 +177,7 @@ In this example, the `dashboardRef` function is memoized and will never change. 
 
 For more details, see the [official React documentation](https://react.dev/reference/react/useCallback) and [W3Schools useCallback tutorial](https://www.w3schools.com/react/react_usecallback.asp).
 
-
-# Saving the dashboard state and filters
-
-1. in AppContext.tsx, add the following state variables:
-```tsx
-const [dashboard, setDashboard] = useState<ILookerConnection>();
-const [global_filters, setGlobalFilters] = useState<Record<string, string>>(
-    {}
-  );
-```
-
-2. Make sure to import your types: 
-- `import { useState } from "react";`
-- `import { ILookerConnection } from "@looker/embed-sdk";`
-
-3. We need to adjust the `AppContextType` type to include the new state variables by adding dashboard and global_filters:
-
-```tsx
-interface AppContextType {
-  isLoading: boolean;
-  me: IUser | undefined;
-  dashboard: ILookerConnection | undefined;
-  setDashboard: React.Dispatch<React.SetStateAction<ILookerConnection | undefined>>;
-  global_filters: GlobalFilters;
-  setGlobalFilters: React.Dispatch<React.SetStateAction<GlobalFilters>>;
-}
-```
-
-4. Update the return of AppContext.Provider to include the new state variables:
-
-```tsx
-return (
-  <AppContext.Provider value={{
-    isLoading,
-    me,
-    dashboard,
-    setDashboard,
-    global_filters,
-    setGlobalFilters,
-  }}>
-    {children}
-  </AppContext.Provider>
-);
-```
-
-5. Navigate to the [Dashboard.tsx](../src/Dashboard.tsx) file.
-6. Within the Dashboard component at the top, include the useAppContext hook and make sure to import using `import { useAppContext } from "./AppContext";`
-
-```tsx
-const Dashboard: React.FC = () => {
-  const { dashboard, setGlobalFilters, setDashboard } = useAppContext();
-  const extension_sdk = useExtensionSdk();
-  // ... rest of the code
-```
-
-7. Update the embed_sdk variable within the dashboard callback add the .on() to capture the url from the page:changed event.
-
-```tsx
-embed_sdk
-.createDashboardWithId("thelook::business_pulse")
-.appendTo(el)
-.on("page:changed", (event: any) => {
-    if (event?.page?.absoluteUrl?.length) {
-        const record = urlToRecord(event.page.absoluteUrl);
-        setGlobalFilters((previous_filter) => {
-            return { ...previous_filter, ...record };
-        });
-    }
-})
-// ... rest of the code
-```
-
-8. Navigate to the [Sidebar.tsx](../src/Sidebar.tsx) file.
-9. Reference the global_filters from the useAppContext and update the CodeBlock to include the global_filters state variable.
-
-```tsx
-const Sidebar: React.FC = () => {
-    const { global_filters } = useAppContext();
-    return (
-        // ... sidebar components
-        <CodeBlock fontSize="xxsmall">{JSON.stringify(global_filters, null, 2)}</CodeBlock>
-    )
-}
-```
-
-
-## What are interfaces and types in TypeScript?
+## Interfaces and Types in TypeScript
 
 In TypeScript, **interfaces** and **types** are two powerful ways to describe the shape of objects, functions, and other structures in your code. They help you define what properties and methods an object should have, making your code safer and easier to understand.
 
@@ -415,9 +232,7 @@ In practice, interfaces and types can often be used interchangeably for object s
 - [TypeScript Handbook: Interfaces](https://www.typescriptlang.org/docs/handbook/interfaces.html)
 - [TypeScript Handbook: Advanced Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html)
 
-
-
-## What is React's Context API?
+## React's Context API
 
 The [React Context API](https://react.dev/reference/react/Context) is a feature in React that allows you to share data (such as state, functions, or any value) across your component tree without having to pass props down manually at every level.
 
@@ -454,7 +269,7 @@ For more details, see the [official React Context documentation](https://react.d
 
 
 
-## What is useState?
+## React's useState
 
 `useState` is a [React Hook](https://legacy.reactjs.org/docs/hooks-state.html) that lets you add state variables to your functional components. State variables are values that React keeps track of between renders, allowing your component to remember information and update the UI when that information changes.
 
