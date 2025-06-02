@@ -10,7 +10,7 @@ In this step, you’ll prepare your development environment and configure your L
 
 To get started working on Module 1, run:
 ```
-git checkout module1-start --force`
+git checkout module1-start --force
 ```
 To jump to the end of this module in case you run out of time, run:
 
