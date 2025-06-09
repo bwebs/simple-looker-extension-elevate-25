@@ -1,15 +1,20 @@
+# Looker Extension Elevate 25 - Extension Frameowork Hands On Lab
+
 # Getting started
 
-1. Open [shell editor](https://shell.cloud.google.com). If you haven't used this before, follow the tutorial or click Mark Done. If you have a cloudshell` open at the bottom, you can close that for now.
-2. Click the file button on the left sidebar (Explorer)
-3. Click the clone repository button
-4. Enter the following repo and clone: `https://github.com/bwebs/simple-looker-extension-elevate-25`. You can keep it in the default folder. When asked, click Open or Open in New Window 
+1. In a new tab, open [shell editor](https://shell.cloud.google.com/?show=ide). If you haven't used this before, follow the tutorial or click Mark Done.
+2. Click the Explorer icon on the left sidebar
+3. Click the **Clone repository** button
+4. Enter the following repo and clone: `https://github.com/bwebs/simple-looker-extension-elevate-25`. You can keep it in the default folder. When asked, click Open, not Open in New Window 
 5. Cmd+shift+p (alternatively click the box in the top and center of the screen, click Show and Run Commands > ) and seearch and select `Terminal: Create New Terminal`
-6. Run `npm install && npm run dev`
-7. Open another terminal using the same command (or press the + button on the top right of the terminal section) and run: `curl -s https://raw.githubusercontent.com/bwebs/simple-looker-extension-elevate-25/refs/heads/main/tunnel.sh | sh` to start a cloudflare tunnel. Once complete, scroll up and find the url in the box.
-8. Open chrome and visit `https://<tunnel-url>/bundle.js` 
-9. Open up a looker project from a demo instance like [demoeast](https://demoeast.cloud.looker.com), [demowest](https://demowest.cloud.looker.com), or [demoemea](https://demoemea.cloud.looker.com) and put this in the manifest.lkml. Make sure to replace your server url in the url field.
-10. 
+6. Run `npm install && npm run dev`. This should take a minute or so to complete. You will see `webpack compiled successfully` in the terminal.
+7. Open another terminal using the same command (or press the + button on the top right of the terminal section) and run: `curl -s https://raw.githubusercontent.com/bwebs/simple-looker-extension-elevate-25/refs/heads/main/tunnel.sh | sh` to start a cloudflare tunnel. Once complete, scroll up and find the url in the box. It looks like this:
+
+![quick-tunnel](docs/module-1/quick-tunnel.png)
+
+8. Open chrome and visit `https://<tunnel-url>/bundle.js`. You should see some javascript code when it loads; if not please reach out for help.
+9.  Open up a looker project and Copy the text below and paste it into the manifest.lkml file. Make sure to replace your server url in the url field. ** NOTE** We recommend using a demo instance like [demoeast](https://demoeast.cloud.looker.com), [demowest](https://demowest.cloud.looker.com), or [demoemea](https://demoemea.cloud.looker.com) if you have access to one. If you do not, you can use any Looker instance, but later in the tutorial you may need to change dashboard ids and other values to match your instance.
+    
 ```
 application: simple_extension {
   label: "Simple Extension"
@@ -21,6 +26,10 @@ application: simple_extension {
 }
 ```
 
-11. Refresh your looker window and go to applications and open Simple Extension
-12. :tada:
-13. Now start the tutoral by going to [section1](./docs/section1.md)
+10.  Open one more terminal window and run `git checkout module1-start --force` to get the starter code for this module.
+10.  Refresh your looker window and go to Looker navigation sidebar. Go to Applications and open Simple Extension. 
+11.  :tada: You should an extension like this
+
+![application-started](docs/module-1/quick-tunnel.png)
+
+12.  Now start the tutoral by going to [module 1](./docs/module-1/0-overview.md)
