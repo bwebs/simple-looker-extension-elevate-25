@@ -8,11 +8,12 @@ In this step, you’ll prepare your development environment and configure your L
 
 ### Git Checkout
 
-To get started working on Module 1, run:
+To get started working on Module 1 you can run the following in the terminal of the cloud shell. **NOTE** You may need to create a new terminal if you have the tunnel running and npm run dev running in two other terminals.
+
 ```
 git checkout module1-start --force
 ```
-To jump to the end of this module in case you run out of time, run:
+To jump to the end of this module in case you run out of time or you want to see if you've done everything correctly, run:
 
 ```
 git checkout module1-end --force

@@ -6,7 +6,7 @@ In this step, you'll extend your extension's functionality by saving the embedde
 
 ## 🛠️ Instructions
 
-1. in `AppContext.tsx`, add the following state variables:
+1. in `AppContext.tsx`, add the following state variables with the AppContext React component:
     ```tsx
     const [dashboard, setDashboard] = useState<ILookerConnection>();
     const [global_filters, setGlobalFilters] = useState<Record<string, string>>(
@@ -14,21 +14,23 @@ In this step, you'll extend your extension's functionality by saving the embedde
       );
     ```
 
-2. Make sure to import your types: 
+2. Make sure to import your types: at the type 
     - `import { useState } from "react";`
     - `import { ILookerConnection } from "@looker/embed-sdk";`
-3. We need to adjust the `AppContextType` type to include the new state variables by adding dashboard and global_filters:
+3. We're using typescript so developers have great documentation and type checking, so we need to adjust the `AppContextType` type to include the new state variables by adding dashboard and global_filters. You can replace the whole type with the following:
+
     ```tsx
     interface AppContextType {
-      isLoading: boolean;
-      me: IUser | undefined;
-      dashboard: ILookerConnection | undefined;
-      setDashboard: React.Dispatch<React.SetStateAction<ILookerConnection | undefined>>;
-      global_filters: GlobalFilters;
-      setGlobalFilters: React.Dispatch<React.SetStateAction<GlobalFilters>>;
+    isLoading: boolean;
+    me: IUser | undefined;
+    dashboard: ILookerConnection | undefined;
+    setDashboard: React.Dispatch<React.SetStateAction<ILookerConnection | undefined>>;
+    global_filters: GlobalFilters;
+    setGlobalFilters: React.Dispatch<React.SetStateAction<GlobalFilters>>;
     }
     ```
-4. Update the return of `AppContext.Provider` to include the new state variables:
+
+1. Update the full return of `AppContext.Provider` to include the new state variables:
     ```tsx
     return (
       <AppContext.Provider value={{
@@ -43,16 +45,15 @@ In this step, you'll extend your extension's functionality by saving the embedde
       </AppContext.Provider>
     );
     ```
-5. Navigate to the [Dashboard.tsx](../../src/Dashboard.tsx) file.
-6. Within the Dashboard component at the top, include the useAppContext hook and make sure to import using `import { useAppContext } from "./AppContext";`
+2. Navigate to the [Dashboard.tsx](../../src/Dashboard.tsx) file.
+3. Within the Dashboard component at the top, include the useAppContext hook within the Dashboard component and make sure to import using `import { useAppContext } from "./AppContext";`
     ```tsx
     const Dashboard: React.FC = () => {
       const { dashboard, setGlobalFilters, setDashboard } = useAppContext();
-      const extension_sdk = useExtensionSdk();
       // ... rest of the code
     ```
 
-7. Update the `embed_sdk` variable within the dashboard callback by adding .on() to capture the url from the `page:changed` event.
+4. Update the `embed_sdk` variable within the dashboard callback by adding .on() to capture the url from the `page:changed` event.
     ```tsx
     embed_sdk
     .createDashboardWithId("thelook::business_pulse")
@@ -68,8 +69,8 @@ In this step, you'll extend your extension's functionality by saving the embedde
     // ... rest of the code
     ```
 
-8. Navigate to the [Sidebar.tsx](../../src/Sidebar.tsx) file.
-9. Reference the `global_filters` from the `useAppContext` and update the code block to include the `global_filters` state variable.
+5. Navigate to the [Sidebar.tsx](../../src/Sidebar.tsx) file.
+6.  Reference the `global_filters` from the `useAppContext` and update the code block to include the `global_filters` state variable.
     ```tsx
     const Sidebar: React.FC = () => {
         const { global_filters } = useAppContext();
