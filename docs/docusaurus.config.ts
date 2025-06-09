@@ -4,6 +4,8 @@ import { themes as prismThemes } from "prism-react-renderer";
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+const isDev = process.env.NODE_ENV === "development";
+
 const config: Config = {
   title: "Looker Extension Elevate 25",
   tagline: "Extension Framework Hands On Lab",
@@ -15,17 +17,17 @@ const config: Config = {
   trailingSlash: false,
 
   // Set the production url of your site here
-  url: "https://bwebs.github.io",
+  url: isDev ? "http://localhost:3000" : "https://bwebs.github.io",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: "/simple-looker-extension-elevate-25/",
+  baseUrl: isDev ? "/" : "/simple-looker-extension-elevate-25/",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: "bwebs", // Usually your GitHub org/user name.
   projectName: "simple-looker-extension-elevate-25", // Usually your repo name.
 
-  onBrokenLinks: "throw",
+  onBrokenLinks: isDev ? "warn" : "throw",
   onBrokenMarkdownLinks: "warn",
 
   // Even if you don't use internationalization, you can use this field to set
@@ -35,7 +37,18 @@ const config: Config = {
     defaultLocale: "en",
     locales: ["en"],
   },
-
+  scripts: [
+    "https://buttons.github.io/buttons.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js",
+    isDev
+      ? "/js/code-block-buttons.js"
+      : "https://bwebs.github.io/simple-looker-extension-elevate-25/js/code-block-buttons.js",
+  ],
+  stylesheets: [
+    isDev
+      ? "/css/code-block-buttons.css"
+      : "https://bwebs.github.io/simple-looker-extension-elevate-25/css/code-block-buttons.css",
+  ],
   presets: [
     [
       "classic",

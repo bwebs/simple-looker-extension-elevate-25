@@ -2,7 +2,7 @@
 
 # Getting started
 
-1. In a new tab, open [shell editor](https://shell.cloud.google.com/?show=ide). If you haven't used this before, follow the tutorial or click Mark Done.
+1. In a new tab, open <a href="https://shell.cloud.google.com/?show=ide" target="_blank">shell editor</a>. If you haven't used this before, follow the tutorial or click Mark Done.
 2. Click the Explorer icon on the left sidebar
 3. Click the **Clone repository** button
 4. Enter the following repo and clone: `https://github.com/bwebs/simple-looker-extension-elevate-25`. You can keep it in the default folder. When asked, click Open, not Open in New Window 
