@@ -63,7 +63,3 @@ Learn more:
 
 - [📘 LookML Project Manifest](./glossary.md#looker-project-manifest)
 - [📘 Entitlements](./glossary.md#entitlements)
-
----
-
-### ➡️ Next: [Embedding a Dashboard](2-embedding-dashboard.md) 

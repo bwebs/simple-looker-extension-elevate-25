@@ -31,7 +31,3 @@ By the end of this module, you’ll have a working embedded dashboard inside you
   - `.on` for javascript events
   - `.then` and dashboard state
 - Adding embed entitlements
-
----
-
-### ➡️ Next: [Project Setup](1-project-setup.md) 

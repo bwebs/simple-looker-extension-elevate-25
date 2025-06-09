@@ -6,7 +6,7 @@ In this step, you'll embed a Looker dashboard into your extension using the Embe
 
 ## 🛠️ Instructions
 
-1. Open up the [Dashboard.tsx](../../src/Dashboard.tsx) file.
+1. Open up the [Dashboard.tsx](../../../src/Dashboard.tsx) file.
 2. In most of the `.tsx` files you will edit in the tutorial, there are five main things you will see in the file.
     - Imports at the top of the file
     - Optionally some styled components like `const StyledCard = styled(Card)``;`
@@ -87,7 +87,3 @@ Learn more:
 - [📘 npm Package Manager](./glossary.md#npm)
 - [📘 Embed SDK](./glossary.md#embed-sdk)
 - [📘 React's useCallback](./glossary.md#reacts-usecallback)
-
----
-
-### ➡️ Next: [Saving Dashboard State](3-saving-dashboard-state.md) 

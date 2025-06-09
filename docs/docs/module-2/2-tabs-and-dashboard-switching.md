@@ -2,11 +2,11 @@
 
 ## 🎯 Goal
 
-In this step, you’ll create a dynamic sidebar that displays user-configured dashboards as clickable tabs. You’ll load dashboards on demand using `loadDashboard()`, apply active filter values, and highlight the currently selected dashboard.
+In this step, you'll create a dynamic sidebar that displays user-configured dashboards as clickable tabs. You'll load dashboards on demand using `loadDashboard()`, apply active filter values, and highlight the currently selected dashboard.
 
 ## 🛠️ Instructions
 
-1. Open up the [Sidebar.tsx](../../src/Sidebar.tsx) file.
+1. Open up the [Sidebar.tsx](../../../src/Sidebar.tsx) file.
 
 2. Load in the extension context to this component with the following code:
     ```tsx
@@ -65,7 +65,7 @@ In this step, you’ll create a dynamic sidebar that displays user-configured da
         // rest of component
     ```
 
-8. Navigate over to the [Dashboard.tsx](../../src/Dashboard.tsx) file.
+8. Navigate over to the [Dashboard.tsx](../../../src/Dashboard.tsx) file.
 9. Change your hard coded `dashboard_id` in `createDashboardWithId` to `.createDashboardWithId(extension_sdk.getContextData()?.dashboards?.[0]!)` so that the initial load navigates to the first dashboard in the sidebar.
 
 ---

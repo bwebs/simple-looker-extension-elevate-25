@@ -45,7 +45,7 @@ In this step, you'll extend your extension's functionality by saving the embedde
       </AppContext.Provider>
     );
     ```
-2. Navigate to the [Dashboard.tsx](../../src/Dashboard.tsx) file.
+2. Navigate to the [Dashboard.tsx](../../../src/Dashboard.tsx) file.
 3. Within the Dashboard component at the top, include the useAppContext hook within the Dashboard component and make sure to import using `import { useAppContext } from "./AppContext";`
     ```tsx
     const Dashboard: React.FC = () => {
@@ -69,7 +69,7 @@ In this step, you'll extend your extension's functionality by saving the embedde
     // ... rest of the code
     ```
 
-5. Navigate to the [Sidebar.tsx](../../src/Sidebar.tsx) file.
+5. Navigate to the [Sidebar.tsx](../../../src/Sidebar.tsx) file.
 6.  Reference the `global_filters` from the `useAppContext` and update the code block to include the `global_filters` state variable.
     ```tsx
     const Sidebar: React.FC = () => {
