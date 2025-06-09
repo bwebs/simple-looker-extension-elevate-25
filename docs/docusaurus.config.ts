@@ -25,7 +25,7 @@ const config: Config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: "bwebs", // Usually your GitHub org/user name.
-  projectName: "simple-looker-extension-elevate-25", // Usually your repo name.
+  projectName: "bwebs.github.io", // Usually your repo name.
 
   onBrokenLinks: isDev ? "warn" : "throw",
   onBrokenMarkdownLinks: "warn",
