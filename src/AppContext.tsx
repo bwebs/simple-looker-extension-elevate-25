@@ -3,6 +3,8 @@ import React, { createContext, useContext } from "react";
 import useSWR from "swr";
 import useSdk from "./hooks/useSdk";
 
+type GlobalFilters = { [key: string]: string };
+
 interface AppContextType {
   isLoading: boolean;
   me: IUser | undefined;
