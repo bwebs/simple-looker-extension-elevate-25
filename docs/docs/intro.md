@@ -37,3 +37,9 @@ application: simple_extension {
 ![application-started](module-1/quick-tunnel.png)
 
 12.  Now start the tutoral by going to [module 1](./module-1/0-overview.md) 
+  
+:::warning Tunnel Disconnect
+
+It is possible that your tunnel will disconnect. It may happen because of inactivity or because your terminal stops. If this happens; your extension will stop loading working when you refresh the page. If this happens, you can reconnect by running `curl -s https://raw.githubusercontent.com/bwebs/simple-looker-extension-elevate-25/refs/heads/main/tunnel.sh | sh` again in the terminal. Then go to your manifest and update the url to the new tunnel url (don't forget the `/bundle.js`).
+ 
+:::
