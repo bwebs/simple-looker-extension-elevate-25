@@ -22,7 +22,3 @@ By the end of this module, you’ll have a fully configurable extension that res
 - @looker/embed-sdk 2.0
   - `loadDashboard`
 - React API `key`
-
----
-
-### ➡️ Next: [Extension Config](1-extension-config.md) 

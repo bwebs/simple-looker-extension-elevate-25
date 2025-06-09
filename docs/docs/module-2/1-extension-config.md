@@ -75,7 +75,3 @@ Learn more:
 
 - [📘 Extension Context Data](./glossary.md#extension-context-data)
 - [📘 Looker Components](./glossary.md#looker-components)
-
----
-
-### ➡️ Next: [Tabs and Dashboard Switching](2-tabs-and-dashboard-switching.md) 

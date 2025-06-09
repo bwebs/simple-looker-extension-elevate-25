@@ -99,7 +99,7 @@ This tells your project to include the specified package or module, making its e
 
 ### package.json
 
-The [`package.json`](../package.json) file is the heart of any React, Javascript, or Node.js project. It lists all the packages (dependencies) your project needs, along with scripts and metadata. You can view your project's `package.json` [here](../package.json).
+The [`package.json`](../../../package.json) file is the heart of any React, Javascript, or Node.js project. It lists all the packages (dependencies) your project needs, along with scripts and metadata. You can view your project's `package.json` [here](../../../package.json).
 
 ### Key dependencies in this project
 - **@looker/components, @looker/embed-sdk, @looker/extension-sdk, @looker/extension-sdk-react**: Official Looker packages for building, embedding, and extending Looker dashboards and apps.
@@ -115,7 +115,7 @@ These are only needed for development and building the project:
 - **webpack, webpack-cli, webpack-dev-server**: Bundles your code and serves it during development.
 - **@babel/core, @babel/preset-***: Tools for transpiling modern JavaScript and React code.
 
-> For a full list, see the [`package.json`](../../package.json) file.
+> For a full list, see the [`package.json`](../../../package.json) file.
 
 ## Embed SDK
 
