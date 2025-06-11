@@ -17,10 +17,10 @@ title: Introduction
 ![quick-tunnel](module-1/quick-tunnel.png)
 
 8. Open chrome and visit `https://<tunnel-url>/bundle.js`. You should see some javascript code when it loads; if not please reach out for help.
-9.  Open up a looker project and Copy the text below and paste it into the manifest.lkml file. Make sure to replace your server url in the url field. ** NOTE** We recommend using a demo instance like [demoeast](https://demoeast.cloud.looker.com), [demowest](https://demowest.cloud.looker.com), or [demoemea](https://demoemea.cloud.looker.com) if you have access to one. If you do not, you can use any Looker instance, but later in the tutorial you may need to change dashboard ids and other values to match your instance.
+9.  Open up a looker project and Copy the text below and paste it into the manifest.lkml file. Make sure to replace your server url in the url field and `<your-name>` with your name to make a unique application. ** NOTE** We recommend using a demo instance like [demoeast](https://demoeast.cloud.looker.com), [demowest](https://demowest.cloud.looker.com), or [demoemea](https://demoemea.cloud.looker.com) if you have access to one. If you do not, you can use any Looker instance, but later in the tutorial you may need to change dashboard ids and other values to match your instance.
     
 ```
-application: simple_extension {
+application: simple_extension_<your-name> {
   label: "Simple Extension"
   url: "<serveo-url>/bundle.js"
   # file: "bundle.js"

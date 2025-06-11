@@ -57,6 +57,8 @@ In this step, you'll embed a Looker dashboard into your extension using the Embe
     };
     ```
 
+    If you are not using a demo instance, you will need to change the dashboard id to the id of the dashboard you want to embed. You can find the dashboard id by going to the dashboard in Looker and copying the id from the url. It will look like this: `/dashboards/<dashboardid>`.
+
     This code uses the [Looker Embed SDK](https://cloud.google.com/looker/docs/embed-sdk-intro) to dynamically embed a dashboard inside your extension using an iframe. It creates a dashboard instance with a specific ID ("thelook::business_pulse"), attaches it to a DOM element, and connects it to Looker.
 
     The `embed_sdk` object provides a clean, chainable API to:
