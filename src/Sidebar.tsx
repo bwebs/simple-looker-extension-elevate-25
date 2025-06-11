@@ -6,12 +6,15 @@ import Settings from "./Settings";
 import { DASHBOARD_ID_KEY } from "./utils/constants";
 import useExtensionSdk from "./hooks/useExtensionSdk";
 import { List, ListItem } from "@looker/components";
+import useSWR from "swr";
+import useSdk from "./hooks/useSdk";
 
 const Sidebar: React.FC = () => {
   const extension_sdk = useExtensionSdk();
   const config_data = extension_sdk.getContextData();
   const dashboard_ids = config_data?.[DASHBOARD_ID_KEY] || [];
   const { global_filters, dashboard } = useAppContext();
+  const sdk = useSdk();
   return (
     <Card
       raised
@@ -26,20 +29,28 @@ const Sidebar: React.FC = () => {
         </Span>
       </Header>
       <List>
-        {dashboard_ids.map((dashboard_id: string) => (
-          <ListItem key={dashboard_id} onClick={() => {
-            dashboard?.loadDashboard(
-              dashboard_id +
-              "?" +
-              Object.entries(global_filters)
-                .map(([key, value]) => `${key}=${value}`)
-                .join("&")
-            );
-          }} >
-            {dashboard_id}
-          </ListItem>
-        ))}
-      </List>
+     {dashboard_ids.map((dashboard_id: string) => {
+       const db = useSWR(dashboard_id, () =>
+         sdk.ok(sdk.dashboard(dashboard_id, "id,title"))
+       );
+       return (
+         <ListItem
+           key={dashboard_id}
+           onClick={() => {
+             dashboard?.loadDashboard(
+               dashboard_id +
+                 "?" +
+                 Object.entries(global_filters)
+                   .map(([key, value]) => `${key}=${value}`)
+                   .join("&")
+             );
+           }}
+         >
+           {db.data?.title || dashboard_id}
+         </ListItem>
+       );
+     })}
+   </List>
       <CodeBlock fontSize="xxsmall">
         {JSON.stringify(global_filters, null, 2)}
       </CodeBlock>

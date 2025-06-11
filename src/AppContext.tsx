@@ -1,8 +1,9 @@
 import { ILookerConnection } from "@looker/embed-sdk";
 import { IUser } from "@looker/sdk";
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useEffect } from "react";
 import useSWR from "swr";
 import useSdk from "./hooks/useSdk";
+import useSearchParams from "./hooks/useSearchParams";
 
 type GlobalFilters = { [key: string]: string };
 
@@ -22,10 +23,15 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const { search_params, updateSearchParams} = useSearchParams()
   const sdk = useSdk();
   const { data: me, isLoading, error } = useSWR("me", () => sdk.ok(sdk.me()));
   const [dashboard, setDashboard] = React.useState<ILookerConnection>();
-  const [global_filters, setGlobalFilters] = React.useState<GlobalFilters>({});
+  const [global_filters, setGlobalFilters] = React.useState<GlobalFilters>(search_params);
+
+  useEffect(()=>{
+    updateSearchParams(global_filters)
+  }, [global_filters])
 
   return (
     <AppContext.Provider

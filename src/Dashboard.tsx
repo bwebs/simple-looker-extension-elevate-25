@@ -17,7 +17,7 @@ const StyledCard = styled(Card)`
 `;
 
 const Dashboard: React.FC = () => {
-  const { dashboard, setGlobalFilters, setDashboard } = useAppContext();
+  const { dashboard, setGlobalFilters, setDashboard, global_filters } = useAppContext();
   const extension_sdk = useExtensionSdk();
   const dashboardRef = useCallback(
     (el: HTMLDivElement) => {
@@ -26,6 +26,7 @@ const Dashboard: React.FC = () => {
         embed_sdk.init(extension_sdk.lookerHostData?.hostUrl!);
         embed_sdk
           .createDashboardWithId(extension_sdk.getContextData()?.dashboards?.[0]!)
+          .withParams(global_filters)
           .appendTo(el)
           .on("page:changed", (event: any) => {
             if (event?.page?.absoluteUrl?.length) {

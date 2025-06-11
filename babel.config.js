@@ -8,8 +8,6 @@ module.exports = function (api) {
       '@babel/preset-react',
       '@babel/preset-typescript'
     ],
-    plugins: [
-      isDevelopment && 'react-refresh/babel' // Only apply in development
-    ].filter(Boolean) // Removes falsy values (like null when not in development)
+    plugins: [].filter(Boolean) // Removes falsy values (like null when not in development)
   };
 };

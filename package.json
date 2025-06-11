@@ -5,7 +5,7 @@
   "scripts": {
     "dev:https": "NODE_ENV=development webpack serve --server-type https --hot --mode development --config webpack.dev.js",
     "build": "NODE_ENV=production webpack --mode production",
-    "dev": "NODE_ENV=development webpack serve --hot --mode development --config webpack.dev.js"
+    "dev": "NODE_ENV=development webpack serve --mode development --config webpack.dev.js"
   },
   "keywords": [],
   "author": "",
