@@ -25,7 +25,7 @@ const Dashboard: React.FC = () => {
         const embed_sdk = getEmbedSDK();
         embed_sdk.init(extension_sdk.lookerHostData?.hostUrl!);
         embed_sdk
-          .createDashboardWithId("thelook::business_pulse")
+          .createDashboardWithId(extension_sdk.getContextData()?.dashboards?.[0]!)
           .appendTo(el)
           .on("page:changed", (event: any) => {
             if (event?.page?.absoluteUrl?.length) {
