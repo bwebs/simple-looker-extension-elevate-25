@@ -76,9 +76,7 @@ import { List, ListItem } from "@looker/components";
 10. Change your hard coded `.createDashboardWithId("thelook_ecomm::business_pulse")` to `.createDashboardWithId(extension_sdk.getContextData()?.dashboards?.[0]!)` so that the initial load navigates to the first dashboard in the sidebar.
 11. Refresh the page and you should see your first dashboard load, the tabs clickable, and when you change the dashboard filters, you should see the JSON object in the sidebar that shows the current filter state of the dashboards. Change a filter like the Date filter and change the dashboard, it will be reflected on the dashboard if you have the same filter names on it.
 
----
-
-Learn more:
+## Learn more
 
 - [📘 Looker Components](./glossary.md#looker-components)
 - [📘 React's component key property](./glossary.md#what-is-key-in-listitem-keydashboard_id-)
