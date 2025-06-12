@@ -5,6 +5,8 @@ import styled from "styled-components";
 import { useAppContext } from "./AppContext";
 import useExtensionSdk from "./hooks/useExtensionSdk";
 import { urlToRecord } from "./utils/urlToRecord";
+import useSdk from "./hooks/useSdk";
+import useSWR from "swr";
 
 const StyledCard = styled(Card)`
   width: 100%;
@@ -17,15 +19,35 @@ const StyledCard = styled(Card)`
 `;
 
 const Dashboard: React.FC = () => {
-  const { dashboard, setGlobalFilters, setDashboard, global_filters } = useAppContext();
+  const { dashboard, setGlobalFilters, setDashboard, global_filters, folder_id, setSelectedDashboardId, selected_dashboard_id } = useAppContext();
   const extension_sdk = useExtensionSdk();
+  const sdk = useSdk();
+  const folder_dashboards = useSWR(
+    folder_id ? `folder-dashboards-${folder_id}` : null, 
+    ()=>sdk.ok(sdk.folder_dashboards(folder_id!, "id"))
+  )
   const dashboardRef = useCallback(
     (el: HTMLDivElement) => {
       if (el && !el.children.length) {
         const embed_sdk = getEmbedSDK();
         embed_sdk.init(extension_sdk.lookerHostData?.hostUrl!);
+        let initial_dashboard = selected_dashboard_id;
+        if (!initial_dashboard) {
+          if (folder_id) {
+            initial_dashboard = folder_dashboards.data?.[0].id
+          } else {
+            initial_dashboard = extension_sdk.getContextData()?.dashboards?.[0];
+          }
+        }
+        
+        if (!initial_dashboard) {
+          return
+        }
+        if (!selected_dashboard_id) {
+          setSelectedDashboardId(initial_dashboard)
+        }
         embed_sdk
-          .createDashboardWithId(extension_sdk.getContextData()?.dashboards?.[0]!)
+          .createDashboardWithId(initial_dashboard)
           .withParams(global_filters)
           .appendTo(el)
           .on("page:changed", (event: any) => {
@@ -46,12 +68,9 @@ const Dashboard: React.FC = () => {
           });
       }
     },
-    [extension_sdk, setGlobalFilters, setDashboard]
-  );
-
-  return (
-    <StyledCard p="xsmall" raised borderRadius="large" ref={dashboardRef} />
-  );
+    [extension_sdk, setGlobalFilters, setDashboard, folder_dashboards.data]
+  )
+  return <StyledCard p="xsmall" raised borderRadius="large" ref={dashboardRef} />
 };
 
 export default Dashboard;
