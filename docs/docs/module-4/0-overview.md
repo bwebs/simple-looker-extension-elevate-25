@@ -1,7 +1,8 @@
-# Module 4: Using Folders for Tab Items
+# Module 4: Using Folder Dashboards for Tab Items
 
+- Using routes in your extension
 - Using the folder_id and folder_dashboards api
-- Retrieving folder_id from the url
+- Providing dashboard_ids instead of the context data
 
 ## Learning Objectives
 

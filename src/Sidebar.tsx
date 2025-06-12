@@ -36,7 +36,8 @@ const Sidebar: React.FC = () => {
         {dashboard_ids.map((dashboard_id) => {
           return (
             <ListItem
-              key={dashboard_id}
+              color="current"
+              itemRole="link"
               selected={dashboard?._currentPathname?.startsWith(
                 `/embed/dashboards/${dashboard_id}`
               )}

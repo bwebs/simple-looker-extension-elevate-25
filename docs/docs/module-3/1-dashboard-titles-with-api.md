@@ -32,26 +32,33 @@ const sdk = useSdk();
 
    ```tsx
    <List>
-     {dashboard_ids.map((dashboard_id: string) => {
-       const db = useSWR(dashboard_id, () =>
-         sdk.ok(sdk.dashboard(dashboard_id, "id,title"))
-       );
-       return (
-         <ListItem
-           key={dashboard_id}
-           onClick={() => {
-             dashboard?.loadDashboard(
-               dashboard_id +
-                 "?" +
-                 Object.entries(global_filters)
-                   .map(([key, value]) => `${key}=${value}`)
-                   .join("&")
-             );
-           }}
-         >
-           {db.data?.title || dashboard_id}
-         </ListItem>
-       );
+     {show_dashboards.map((dashboard_id: string) => {
+       const Item = ({ dashboard_id }: { dashboard_id: string }) => {
+         const db = useSWR(dashboard_id, () =>
+           sdk.ok(sdk.dashboard(dashboard_id, "id,title"))
+         );
+         return (
+           <ListItem
+             key={dashboard_id}
+             itemRole="link"
+             selected={dashboard?._currentPathname?.startsWith(
+               `/embed/dashboards/${dashboard_id}`
+             )}
+             onClick={() => {
+               dashboard?.loadDashboard(
+                 dashboard_id +
+                   "?" +
+                   Object.entries(global_filters)
+                     .map(([key, value]) => `${key}=${value}`)
+                     .join("&")
+               );
+             }}
+           >
+             {db.data?.title || dashboard_id}
+           </ListItem>
+         );
+       };
+       return <Item key={dashboard_id} dashboard_id={dashboard_id} />;
      })}
    </List>
    ```
