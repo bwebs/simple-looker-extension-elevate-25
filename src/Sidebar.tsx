@@ -1,12 +1,4 @@
-import {
-  Box,
-  Card,
-  CodeBlock,
-  Header,
-  List,
-  ListItem,
-  Span,
-} from "@looker/components";
+import { Box, Card, Header, List, ListItem, Span } from "@looker/components";
 import React from "react";
 import Balancer from "react-wrap-balancer";
 import useSWR from "swr";
@@ -74,9 +66,9 @@ const Sidebar: React.FC = () => {
           return <Item key={dashboard_id} dashboard_id={dashboard_id} />;
         })}
       </List>
-      <CodeBlock fontSize="xxsmall">
+      {/* <CodeBlock fontSize="xxsmall">
         {JSON.stringify(global_filters, null, 2)}
-      </CodeBlock>
+      </CodeBlock> */}
       <Box flexGrow={1} />
       <Settings />
     </Card>
